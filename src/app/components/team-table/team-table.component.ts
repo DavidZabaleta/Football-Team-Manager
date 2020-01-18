@@ -26,6 +26,8 @@ export class TeamTableComponent implements OnInit {
           country: Countries.Colombia,
           players: null
         };
+
+        this.teamService.addTeam(team);
       }
     });
   }

@@ -3,6 +3,7 @@ export interface Player {
     name: string;
     lastName: string;
     position: SquadNumber;
+    height: number,
     weight: number;
     nationality: string;
     leftFooted: boolean;
@@ -269,3 +270,5 @@ export enum Countries {
     Zambia = 'ZM',
     Zimbabw = 'ZW'
   }
+
+ 

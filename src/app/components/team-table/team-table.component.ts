@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService, TeamsTableHeaders } from 'src/app/services/team.service';
+import { TeamService, TeamsTableHeaders } from '../../services/team.service';
 import { Observable } from 'rxjs';
-import { Team } from 'src/app/interfaces/team';
 import { take } from 'rxjs/operators';
-import { Countries } from 'src/app/interfaces/player';
+import { Team } from '../../interfaces/team';
+import { Countries } from '../../interfaces/player';
 
 @Component({
   selector: 'app-team-table',
@@ -11,25 +11,25 @@ import { Countries } from 'src/app/interfaces/player';
   styleUrls: ['./team-table.component.scss']
 })
 export class TeamTableComponent implements OnInit {
-
-  public team$: Observable<Team[]>;
+  public teams$: Observable<Team[]>;
   public tableHeaders = TeamsTableHeaders;
 
-  constructor(private teamService: TeamService) { }
+  constructor(private teamService: TeamService) {}
 
   ngOnInit() {
-    this.team$ = this.teamService.getTeams();
-    this.teamService.getTeams().pipe(take(1)).subscribe(teams => {
-      if (teams.length === 0) {
-        const team: Team = {
-          name: 'Tapitas FC',
-          country: Countries.Colombia,
-          players: null
-        };
-
-        this.teamService.addTeam(team);
-      }
-    });
+    this.teams$ = this.teamService.getTeams();
+    this.teamService
+      .getTeams()
+      .pipe(take(1))
+      .subscribe(teams => {
+        if (teams.length === 0) {
+          const team: Team = {
+            name: 'MyAmazingTeam',
+            country: Countries.Argentina,
+            players: null
+          };
+          this.teamService.addTeam(team);
+        }
+      });
   }
-
 }
